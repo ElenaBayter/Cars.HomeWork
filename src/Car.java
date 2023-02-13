@@ -33,37 +33,97 @@
 
  */
 
-import java.util.Random;
+public class Car {
+    private String model;
+    private int year;
+    private double price;
+    private String color;
+    private double power;
+    private boolean isEngine;
+    private double speed;
+    private double distance;
 
-public class Cars {
-    String model;
-    int year;
-    double price;
-    String color;
-    double power;
-    boolean isEngine;
-
-    public Cars(String model2, int year2, double price2, String color2, double power2) {
+    public Car(String model2, int year2, double price2, String color2, double power2,  double speed, double distance) {
         this.model = model2;
         this.year = year2;
         this.price = price2;
         this.color = color2;
         this.power = power2;
         this.isEngine = false;
+        this.distance = distance;
+        this.speed = speed;
     }
 
-    public void getInfo(){
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+    public double getSpeed() {
+        return speed;
+    }
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getPower() {
+        return power;
+    }
+
+    public void setPower(double power) {
+        this.power = power;
+    }
+
+    public boolean isEngine() {
+        return isEngine;
+    }
+
+    public void setEngine(boolean engine) {
+        isEngine = engine;
+    }
+    public void setSpeed (double speed) {
+        this.speed = speed;
+    }
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public void getInfo() {
         System.out.println("Model:" + model + ", year: " + year + ", price: " + price + ", color: " + color + ", power: " + power);
     }
 
-    public void start()
-    {
+    public void start() {
         this.isEngine = true;
         System.out.println(this.model + " is working");
     }
 
-    public void stop()
-    {
+    public void stop() {
         this.isEngine = false;
         System.out.println(this.model + " is stopped");
     }
@@ -75,14 +135,34 @@ public class Cars {
             System.out.println(this.model + " is not going anywhere");
     }
 
-    public void newCar(){
-        if (this.year > this.year){
-            System.out.println(this.model + " is more new");
+    public void checkByYear(Car car1) {
+        if (this.year == car1.getYear()) {
+            //System.out.println("This " + this.color + " " + this.model + " same year with " + car1.getColor() + " " + car1.getModel());
+            System.out.println(String.format("This %s %s same year with %s %s", this.color, this.model, car1.getColor(), car1.getModel()));
+        }
+        else if (this.year > car1.getYear()){
+            System.out.println(String.format("This %s %s is younger then %s %s", this.color, this.model, car1.getColor(), car1.getModel()));
+        }
+        else {
+            System.out.println(String.format("This %s %s is older then %s %s", this.color, this.model, car1.getColor(), car1.getModel()));
         }
     }
-    Random random = new Random();
+    void move(){
+        this.distance += Math.random() * this.speed;
+    }
+    void print(){
+        StringBuilder track = new StringBuilder();
+        for (int i = 0; i < (int)this.distance; i++) {
+            track.append(".");
+        }
+        System.out.println(track.toString() + model);
+    }
 
-    public void rides(){
-        
+    @Override
+    public String toString() {
+        return String.format("Model: " + model + " by year: " + year + " and with color: " + color + " with power: " + power + " and price:" + price);
     }
 }
+
+
+
